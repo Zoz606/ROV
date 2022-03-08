@@ -3,23 +3,11 @@ import numpy as np
 from ColourDetector import *
 
 # range of the color brown
-lowBrown, highBrown = np.array([10, 100, 20]), np.array([20, 255, 200])
+lowBrown, highBrown = np.array([10, 0, 0]), np.array([20, 255, 255])
 
 # capture the video
 cap = cv.VideoCapture(0)
 #frame = cv.imread('1.png')
-
-'''
-colorDetection = DetectColour(frame, lowBrown, highBrown, 800)
-contours = colorDetection.getcontours(frame)
-frame = cv.drawContours(frame, contours, -1, (255, 0, 0), 4)
-
-
-cv.imshow('LIVE', frame)
-
-cv.waitKey(0)
-cv.destroyAllWindows()
-'''
 
 
 while True:
@@ -28,10 +16,9 @@ while True:
     # detection of the brown color and draw the contour around it
     colorDetection = DetectColour(frame, lowBrown, highBrown, 800)
     contours = colorDetection.getcontours(frame)
-    frame = cv.drawContours(frame, contours, -1, (255, 0, 0), 1)
+    frame = cv.drawContours(frame, contours, 1, (255, 0, 0), 1)
 
     for contour in contours:
-
         # initializ the shape name and approximate the contour
         perimeter = cv.arcLength(contour, True)
         approximate = cv.approxPolyDP(contour, 0.01 * perimeter, True)
@@ -43,10 +30,11 @@ while True:
             y = int(M['m01']/M['m00'])
 
         cv.putText(frame, 'Damaged part', (x, y),
-                   cv.FONT_HERSHEY_COMPLEX, 1, (0, 0, 0), 4)
+                   cv.FONT_HERSHEY_COMPLEX, 1, (0, 0, 0), 1)
 
     cv.imshow('LIVE', frame)
     if cv.waitKey(1) == 27:
         break
 
+cap.release()
 cv.destroyAllWindows()
