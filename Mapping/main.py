@@ -6,7 +6,9 @@ from saveImg import *
 startPoint = False
 endPoint = False
 
-
+# Operation:
+# click on the up left of the contour then on the bottm right, it draws a rectangle between the two points, 
+# then on the third click it show the image inside the rectangle and save it 
 def clickEvent(event, x, y, flags, params):
     global line, startPoint, endPoint, screenshot
     # get mouse click
@@ -27,12 +29,16 @@ def clickEvent(event, x, y, flags, params):
             saveImage(screenshot)
 
 
-# cap = cv.VideoCapture('rtsp://admin:adminrov1234@192.168.1.108:554/cam/realmonitor?channel=1&subtype=0') #ROV cam
-cap = cv.VideoCapture(1)  # Labtop cam
+cap = cv.VideoCapture(
+    'rtsp://admin:adminrov1234@192.168.1.108:554/cam/realmonitor?channel=1&subtype=0')  # ROV cam
+# cap = cv.VideoCapture(1)  # Labtop cam
 # cap = cv.VideoCapture(0)  # Mobile cam
+
 
 while True:
     _, frame = cap.read()
+    frame = cv.resize(frame, (1000, 700))
+    
     cv.namedWindow('LIVE')
     cv.setMouseCallback('LIVE', clickEvent)
 
