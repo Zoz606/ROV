@@ -22,7 +22,7 @@ def clickEvent(event, x, y, flags, params):
         elif startPoint == False:
             line = (x, y, 0, 0)
             startPoint = True
-        elif endPoint == False: 
+        elif endPoint == False:
             line = (line[0], line[1], x, y)
             endPoint = True
         screenshot = frame[line[1]: line[3], line[0]: line[2]]
@@ -31,12 +31,14 @@ def clickEvent(event, x, y, flags, params):
             saveImage(screenshot)
 
 
-#cap = cv.VideoCapture('rtsp://admin:adminrov1234@192.168.1.108:554/cam/realmonitor?channel=1&subtype=0')  # ROV cam
+# cap = cv.VideoCapture('rtsp://admin:adminrov1234@192.168.1.108:554/cam/realmonitor?channel=1&subtype=0')  # ROV cam
 cap = cv.VideoCapture(1)  # Labtop cam
 # cap = cv.VideoCapture(0)  # Mobile cam
 
+stitchCounter = 1
 
 while True:
+    # if stitchCounter < 8:
     _, frame = cap.read()
     frame = cv.resize(frame, (1000, 700))
 
@@ -45,8 +47,12 @@ while True:
 
     if startPoint == True and endPoint == True:
         cv.rectangle(frame, (line[0], line[1]),
-                     (line[2], line[3]), (255, 0, 0), 2)
+                     (line[2], line[3]), (255, 0, 0), 1)
+
     cv.imshow('LIVE', frame)
+    stitchCounter += 1
+
+    # elif stitchCounter == 8:
 
     if cv.waitKey(1) == 27:
         break
