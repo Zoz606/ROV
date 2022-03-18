@@ -1,3 +1,4 @@
+from hashlib import new
 import cv2 as cv
 from ColourDetector import *
 from saveImg import *
@@ -27,15 +28,15 @@ def clickEvent(event, x, y, flags, params):
             endPoint = True
         screenshot = frame[line[1]: line[3], line[0]: line[2]]
         if startPoint == False and endPoint == False:
-            cv.imshow('screenshot', screenshot)
-            saveImage(screenshot)
+            #cv.imshow('screenshot', screenshot)
+            saveImg(screenshot)
 
 
 # cap = cv.VideoCapture('rtsp://admin:adminrov1234@192.168.1.108:554/cam/realmonitor?channel=1&subtype=0')  # ROV cam
 cap = cv.VideoCapture(1)  # Labtop cam
 # cap = cv.VideoCapture(0)  # Mobile cam
 
-stitchCounter = 1
+#e7sebM3ayaRabnaYostorTare2ak = 1
 
 while True:
     # if stitchCounter < 8:
@@ -50,7 +51,7 @@ while True:
                      (line[2], line[3]), (255, 0, 0), 1)
 
     cv.imshow('LIVE', frame)
-    stitchCounter += 1
+    #e7sebM3ayaRabnaYostorTare2ak += 1
 
     # elif stitchCounter == 8:
 
