@@ -23,16 +23,20 @@ def saveImg(screenshot):
     cv.imwrite(f'{counter}.jpg', resizedImg)
     # Show every screenshot
     cv.imshow(f'{counter}', resizedImg)
+    print(counter)
     counter += 1
 
-    if counter == 8:
+    if counter >= 8:
         evenList = []
         oddList = []
-        for evenCounter in range(2, 8, 2):
-            evenList.append(f'{evenCounter}.jpg')
+        for evenCounter in range(2, 9, 2):
 
-        for oddCounter in range(1, 7, 2):
-            oddList.append(f'{oddCounter}.jpg')
-            
-        for i in range(0, 4):
-            horizontalEvenImg = np.concatenate((evenList[i], evenList[i + 1]))
+            evenList.append(cv.imread(f'{evenCounter}.jpg'))
+
+        for oddCounter in range(1, 8, 2):
+            oddList.append(cv.imread(f'{oddCounter}.jpg'))
+
+        horizontalEvenImg = cv.vconcat(evenList)
+        horizontalOddImg = cv.vconcat(oddList)
+        cv.imshow('even', horizontalEvenImg)
+        cv.imshow('odd', horizontalOddImg)
