@@ -1,4 +1,5 @@
 import cv2 as cv
+import numpy as np
 
 
 counter = 1
@@ -22,10 +23,16 @@ def saveImg(screenshot):
     cv.imwrite(f'{counter}.jpg', resizedImg)
     # Show every screenshot
     cv.imshow(f'{counter}', resizedImg)
+    counter += 1
 
-    counter = counter + 1
+    if counter == 8:
+        evenList = []
+        oddList = []
+        for evenCounter in range(2, 8, 2):
+            evenList.append(f'{evenCounter}.jpg')
 
-
-'''   if counter % 2 == 0:
-        cv.hconcat()
-'''
+        for oddCounter in range(1, 7, 2):
+            oddList.append(f'{oddCounter}.jpg')
+            
+        for i in range(0, 4):
+            horizontalEvenImg = np.concatenate((evenList[i], evenList[i + 1]))
