@@ -6,7 +6,7 @@ counter = 1
 
 
 def resizeImg(img):
-    resizedImg = cv.resize(img, (200, 300))
+    resizedImg = cv.resize(img, (150, 200))
     return resizedImg
 
 
@@ -23,10 +23,10 @@ def saveImg(screenshot):
     cv.imwrite(f'{counter}.jpg', resizedImg)
     # Show every screenshot
     cv.imshow(f'{counter}', resizedImg)
-    print(counter)
+
     counter += 1
 
-    if counter >= 8:
+    if counter > 8:
         evenList = []
         oddList = []
         for evenCounter in range(2, 9, 2):
@@ -38,5 +38,8 @@ def saveImg(screenshot):
 
         horizontalEvenImg = cv.vconcat(evenList)
         horizontalOddImg = cv.vconcat(oddList)
-        cv.imshow('even', horizontalEvenImg)
-        cv.imshow('odd', horizontalOddImg)
+        totalMap = cv.hconcat([horizontalEvenImg, horizontalOddImg])
+        #cv.imshow('even', horizontalEvenImg)
+        #cv.imshow('odd', horizontalOddImg)
+        cv.imshow('MAP', totalMap)
+        cv.imwrite('Map.jpg', totalMap)

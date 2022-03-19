@@ -13,7 +13,7 @@ endPoint = False
 
 
 def clickEvent(event, x, y, flags, params):
-    global line, startPoint, endPoint, screenshot
+    global line, startPoint, endPoint
     # get mouse click
     if event == cv.EVENT_LBUTTONDOWN:
         if startPoint == True and endPoint == True:
@@ -30,6 +30,10 @@ def clickEvent(event, x, y, flags, params):
         if startPoint == False and endPoint == False:
             #cv.imshow('screenshot', screenshot)
             saveImg(screenshot)
+    elif event == cv.EVENT_RBUTTONDOWN:
+        startPoint = False
+        endPoint = False
+        line = (0, 0, 0, 0)
 
 
 # cap = cv.VideoCapture('rtsp://admin:adminrov1234@192.168.1.108:554/cam/realmonitor?channel=1&subtype=0')  # ROV cam
@@ -41,14 +45,14 @@ cap = cv.VideoCapture(1)  # Labtop cam
 while True:
     # if stitchCounter < 8:
     _, frame = cap.read()
-    frame = cv.resize(frame, (1000, 700))
+    #frame = cv.resize(frame, (1000, 700))
 
     cv.namedWindow('LIVE')
     cv.setMouseCallback('LIVE', clickEvent)
 
     if startPoint == True and endPoint == True:
         cv.rectangle(frame, (line[0], line[1]),
-                     (line[2], line[3]), (255, 0, 0), 1)
+                     (line[2], line[3]), (0, 0, 0), 1)
 
     cv.imshow('LIVE', frame)
     #e7sebM3ayaRabnaYostorTare2ak += 1
