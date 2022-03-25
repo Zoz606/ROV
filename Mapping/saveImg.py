@@ -6,7 +6,7 @@ counter = 1
 
 
 def resizeImg(img):
-    resizedImg = cv.resize(img, (150, 200))
+    resizedImg = cv.resize(img, (150, 180))
     return resizedImg
 
 
@@ -30,11 +30,12 @@ def saveImg(screenshot):
         evenList = []
         oddList = []
         for evenCounter in range(2, 9, 2):
-
             evenList.append(cv.imread(f'{evenCounter}.jpg'))
+        evenList.reverse()
 
         for oddCounter in range(1, 8, 2):
             oddList.append(cv.imread(f'{oddCounter}.jpg'))
+        oddList.reverse()
 
         horizontalEvenImg = cv.vconcat(evenList)
         horizontalOddImg = cv.vconcat(oddList)

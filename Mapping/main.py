@@ -38,7 +38,7 @@ def clickEvent(event, x, y, flags, params):
 
 # cap = cv.VideoCapture('rtsp://admin:adminrov1234@192.168.1.108:554/cam/realmonitor?channel=1&subtype=0')  # ROV cam
 cap = cv.VideoCapture(1)  # Labtop cam
-# cap = cv.VideoCapture(0)  # Mobile cam
+#cap = cv.VideoCapture(0)  # Mobile cam
 
 #e7sebM3ayaRabnaYostorTare2ak = 1
 
