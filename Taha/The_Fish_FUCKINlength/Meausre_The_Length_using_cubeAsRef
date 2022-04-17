@@ -1,0 +1,16 @@
+import cv2
+from ColourDetector import DetectColour 
+import numpy as np
+cap=cv2.VideoCapture(0)
+low_Red=np.array([159, 50, 70])
+high_red=np.array([180, 255, 255])
+while True:
+    ret,img=cap.read()
+    colour_obj=DetectColour(colourlow=low_Red,colourhigh=high_red,tolerance=200)
+    cr=colour_obj.getcontours(img1=img)
+    cv2.drawContours(img, cr, -1, (255, 0, 0), 2)
+    cv2.imshow("Frame",img)
+    if cv2.waitKey(1)==27:
+        break
+        
+cv2.destroyAllWindows()
