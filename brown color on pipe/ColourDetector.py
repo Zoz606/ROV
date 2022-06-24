@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-
+from rangeOfColors import *
 
 class DetectColour:
     def __init__(self, img, colourlow, colourhigh, tolerance):

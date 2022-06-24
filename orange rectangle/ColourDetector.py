@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-
+from rangeOfColors import *
 
 class DetectColour:
     def __init__(self, img, colourlow, colourhigh, tolerance):
@@ -12,9 +12,9 @@ class DetectColour:
         # tolerance to adjust the area of the contours we need to get
         self.tolerance = tolerance
 
-    def getcontours(self):
+    def getcontours(self, img1):
         # read the image as hsv
-        self.hsv = cv2.cvtColor(self.img, cv2.COLOR_BGR2HSV)
+        self.hsv = cv2.cvtColor(img1, cv2.COLOR_BGR2HSV)
         # get the mask of the color
         self.mask = cv2.inRange(self.hsv, self.lower_colour, self.upper_colour)
         # get the gradient of the mask and the image by all ones so we remove any parts black and remains the white
@@ -30,7 +30,7 @@ class DetectColour:
                 # append what we need in new list
                 newcontourslist.append(contours[i])
         contours = newcontourslist  # passing the list to contours
-        return contours, gradient  # return the contours to athoer function
+        return contours  # return the contours to athoer function
 
     def show(self, video, cap):
         if video == True:
